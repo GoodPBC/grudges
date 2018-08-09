@@ -1,29 +1,38 @@
-import React, { Component } from 'react';
-import NewGrudge from './NewGrudge';
-import Grudges from './Grudges';
-import './Application.css';
+import React, { Component } from "react";
+import NewGrudge from "./NewGrudge";
+import Grudges from "./Grudges";
+import "./Application.css";
+
+import { withAuthenticator } from "aws-amplify-react";
 
 class Application extends Component {
   state = {
-    grudges: [],
+    grudges: []
   };
 
   addGrudge = grudge => {
-    this.setState({ grudges: [grudge, ...this.state.grudges] });
+    this.setState({
+      grudges: [grudge, ...this.state.grudges]
+    });
   };
 
   removeGrudge = grudge => {
     this.setState({
-      grudges: this.state.grudges.filter(other => other.id !== grudge.id),
+      grudges: this.state.grudges.filter(other => other.id !== grudge.id)
     });
   };
 
   toggle = grudge => {
     const othergrudges = this.state.grudges.filter(
-      other => other.id !== grudge.id,
+      other => other.id !== grudge.id
     );
-    const updatedGrudge = { ...grudge, avenged: !grudge.avenged };
-    this.setState({ grudges: [updatedGrudge, ...othergrudges] });
+    const updatedGrudge = {
+      ...grudge,
+      avenged: !grudge.avenged
+    };
+    this.setState({
+      grudges: [updatedGrudge, ...othergrudges]
+    });
   };
 
   render() {
@@ -33,22 +42,22 @@ class Application extends Component {
 
     return (
       <div className="Application">
-        <NewGrudge onSubmit={this.addGrudge} />
+        <NewGrudge onSubmit={this.addGrudge} />{" "}
         <Grudges
           title="Unavenged Grudges"
           grudges={unavengedgrudges}
           onCheckOff={this.toggle}
           onRemove={this.removeGrudge}
-        />
+        />{" "}
         <Grudges
           title="Avenged Grudges"
           grudges={avengedgrudges}
           onCheckOff={this.toggle}
           onRemove={this.removeGrudge}
-        />
+        />{" "}
       </div>
     );
   }
 }
 
-export default Application;
+export default withAuthenticator(Application);
