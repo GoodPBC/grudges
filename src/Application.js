@@ -3,12 +3,17 @@ import NewGrudge from "./NewGrudge";
 import Grudges from "./Grudges";
 import "./Application.css";
 
+import { API } from "aws-amplify";
 import { withAuthenticator } from "aws-amplify-react";
 
 class Application extends Component {
   state = {
     grudges: []
   };
+  // as soon as Application mounts this method gets called on the component
+  componentDidMount() {
+    console.log("I am the Application Component");
+  }
 
   addGrudge = grudge => {
     this.setState({
