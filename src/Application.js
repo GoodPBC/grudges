@@ -16,13 +16,19 @@ class Application extends Component {
 
     // Get request to our API to retrieve ALL grudges
     API.get("GrudgesCRUD", "/Grudges").then(grudges => {
-      this.setState({ grudges });
-      console.log({ grudges });
+      this.setState({
+        grudges
+      });
+      console.log({
+        grudges
+      });
     });
   }
 
   addGrudge = grudge => {
-    API.post("GrudgesCRUD", "/Grudges", { body: grudge }).then(() => {
+    API.post("GrudgesCRUD", "/Grudges", {
+      body: grudge
+    }).then(() => {
       this.setState({
         grudges: [grudge, ...this.state.grudges]
       });
@@ -30,8 +36,10 @@ class Application extends Component {
   };
 
   removeGrudge = grudge => {
-    this.setState({
-      grudges: this.state.grudges.filter(other => other.id !== grudge.id)
+    API.del("GrudgesCRUD", "/Grudges/object/" + grudge.id).then(() => {
+      this.setState({
+        grudges: this.state.grudges.filter(other => other.id !== grudge.id)
+      });
     });
   };
 
