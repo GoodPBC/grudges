@@ -44,15 +44,26 @@ class Application extends Component {
   };
 
   toggle = grudge => {
-    const othergrudges = this.state.grudges.filter(
-      other => other.id !== grudge.id
-    );
+    // create new value for updated grudge
     const updatedGrudge = {
+      //take all of the properties of given grudge  & copying them
       ...grudge,
+      //We take the avenged property and flip it to the opposite of what it was
       avenged: !grudge.avenged
     };
-    this.setState({
-      grudges: [updatedGrudge, ...othergrudges]
+    // we PUT to the API the...
+    API.put("GrudgesCRUD", "/Grudges", {
+      //request body of the updatedGrudge
+      body: updatedGrudge
+      //then
+    }).then(() => {
+      //we update the application state with updatedGrudges by using filter to replace the old grudge with the new grudge
+      const othergrudges = this.state.grudges.filter(
+        other => other.id !== grudge.id
+      );
+      this.setState({
+        grudges: [updatedGrudge, ...othergrudges]
+      });
     });
   };
 
