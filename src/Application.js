@@ -12,12 +12,21 @@ class Application extends Component {
   };
   // as soon as Application mounts this method gets called on the component
   componentDidMount() {
-    console.log("I am the Application Component");
+    // console.log("I am the Application Component");
+
+    // Get request to our API to retrieve ALL grudges
+    API.get("GrudgesCRUD", "/Grudges").then(grudges => {
+      console.log("GET ALL grudges from API", {
+        grudges
+      });
+    });
   }
 
   addGrudge = grudge => {
-    this.setState({
-      grudges: [grudge, ...this.state.grudges]
+    API.post("GrudgesCRUD", "/Grudges", { body: grudge }).then(() => {
+      this.setState({
+        grudges: [grudge, ...this.state.grudges]
+      });
     });
   };
 
