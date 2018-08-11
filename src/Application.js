@@ -16,9 +16,8 @@ class Application extends Component {
 
     // Get request to our API to retrieve ALL grudges
     API.get("GrudgesCRUD", "/Grudges").then(grudges => {
-      console.log("GET ALL grudges from API", {
-        grudges
-      });
+      this.setState({ grudges });
+      console.log({ grudges });
     });
   }
 
