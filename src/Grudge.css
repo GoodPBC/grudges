@@ -11,3 +11,11 @@
   background-color: white;
   text-decoration: underline;
 }
+
+.Grudge {
+  background-color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: .8rem;
+  text-transform: none !important;
+  text-align: left;
+}
